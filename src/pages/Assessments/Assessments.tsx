@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ClipboardList, Plus, Search, Filter, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { ClipboardList, Plus, Search, Filter, Clock, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { format } from 'date-fns';
 

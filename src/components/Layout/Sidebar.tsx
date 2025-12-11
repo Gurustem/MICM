@@ -6,7 +6,6 @@ import {
   ClipboardList,
   MessageSquare,
   BarChart3,
-  Calendar,
   FileMusic,
   X,
   Users,

@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { MessageSquare, Send, Search, Plus, Bell, Users } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { MessageSquare, Search, Plus, Bell, Users } from 'lucide-react';
 import { format } from 'date-fns';
 
 const Communication = () => {
-  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'messages' | 'announcements' | 'forums'>('messages');
   const [searchTerm, setSearchTerm] = useState('');
 

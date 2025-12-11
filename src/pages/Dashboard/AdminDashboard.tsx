@@ -1,9 +1,7 @@
 import { Users, BookOpen, Music, TrendingUp, AlertCircle, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
 
 const AdminDashboard = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   // Mock data

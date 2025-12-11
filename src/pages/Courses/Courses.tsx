@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Plus, Search, Filter, BookOpen, Users, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Plus, Search, Filter, BookOpen, Users } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Courses = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState<'all' | 'instrument' | 'theory' | 'ensemble'>('all');
 

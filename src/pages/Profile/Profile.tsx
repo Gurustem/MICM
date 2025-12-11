@@ -1,4 +1,4 @@
-import { User, Mail, Phone, Calendar, Music, Edit } from 'lucide-react';
+import { Mail, Phone, Calendar, Music, Edit } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { format } from 'date-fns';
 

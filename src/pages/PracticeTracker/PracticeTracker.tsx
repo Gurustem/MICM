@@ -8,7 +8,7 @@ const PracticeTracker = () => {
   const [selectedInstrument, setSelectedInstrument] = useState('Piano');
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isPracticing) {
       interval = setInterval(() => {
         setPracticeTime((prev) => prev + 1);

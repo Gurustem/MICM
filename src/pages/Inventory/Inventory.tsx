@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Music, Search, Filter, Plus, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { Music, Search, Filter, Plus, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { format } from 'date-fns';
 
 const Inventory = () => {
   const { user } = useAuth();
-  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'borrowed' | 'maintenance'>('all');
 

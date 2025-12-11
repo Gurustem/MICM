@@ -111,7 +111,7 @@ const Analytics = () => {
                 fill="#8884d8"
                 dataKey="count"
               >
-                {instrumentData.map((entry, index) => (
+                {instrumentData.map((_, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>

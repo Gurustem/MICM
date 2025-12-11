@@ -1,11 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Play, FileText, Music, CheckCircle, Clock } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
 
 const CourseDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   // Mock data
   const course = {
