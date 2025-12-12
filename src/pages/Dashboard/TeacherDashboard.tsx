@@ -8,7 +8,7 @@ const TeacherDashboard = () => {
 
   // Mock data
   const stats = {
-    totalStudents: 45,
+    totalStudents: 12,
     activeCourses: 8,
     pendingAssessments: 12,
     borrowedInstruments: 23,

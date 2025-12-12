@@ -9,8 +9,8 @@ const Analytics = () => {
 
   // Mock data
   const stats = {
-    totalStudents: 340,
-    activeStudents: 285,
+    totalStudents: 155,
+    activeStudents: 130,
     totalCourses: 48,
     completionRate: 72,
     averagePracticeHours: 8.5,
@@ -20,9 +20,9 @@ const Analytics = () => {
   };
 
   const progressData = [
-    { level: 'Beginner', count: 120, color: '#0073e6' },
-    { level: 'Intermediate', count: 150, color: '#00a68c' },
-    { level: 'Advanced', count: 70, color: '#ffa41a' },
+    { level: 'Beginner', count: 55, color: '#0073e6' },
+    { level: 'Intermediate', count: 70, color: '#00a68c' },
+    { level: 'Advanced', count: 30, color: '#ffa41a' },
   ];
 
   const instrumentData = [
@@ -35,11 +35,11 @@ const Analytics = () => {
   ];
 
   const monthlyProgress = [
-    { month: 'Jan', students: 280, practice: 6.2, completion: 65 },
-    { month: 'Feb', students: 295, practice: 7.1, completion: 68 },
-    { month: 'Mar', students: 310, practice: 7.8, completion: 70 },
-    { month: 'Apr', students: 325, practice: 8.2, completion: 71 },
-    { month: 'May', students: 340, practice: 8.5, completion: 72 },
+    { month: 'Jan', students: 140, practice: 6.2, completion: 65 },
+    { month: 'Feb', students: 145, practice: 7.1, completion: 68 },
+    { month: 'Mar', students: 150, practice: 7.8, completion: 70 },
+    { month: 'Apr', students: 152, practice: 8.2, completion: 71 },
+    { month: 'May', students: 155, practice: 8.5, completion: 72 },
   ];
 
   const attendanceData = [
@@ -177,7 +177,7 @@ const Analytics = () => {
           color="primary"
           trend="up"
           trendValue="+12 this month"
-          subtitle="340 enrolled students"
+          subtitle="155 enrolled students"
         />
         <StatCard
           title="Active Students"
@@ -186,7 +186,7 @@ const Analytics = () => {
           color="green"
           trend="up"
           trendValue="84% active"
-          subtitle="285 currently active"
+          subtitle="130 currently active"
         />
         <StatCard
           title="Completion Rate"
@@ -287,7 +287,7 @@ const Analytics = () => {
                 key={item.level}
                 label={item.level}
                 value={item.count}
-                max={340}
+                max={155}
                 color={item.color}
               />
             ))}

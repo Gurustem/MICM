@@ -6,7 +6,7 @@ const AdminDashboard = () => {
 
   // Mock data
   const stats = {
-    totalStudents: 340,
+    totalStudents: 155,
     totalTeachers: 16,
     activeCourses: 48,
     totalInstruments: 120,
