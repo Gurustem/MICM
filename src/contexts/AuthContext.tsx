@@ -19,37 +19,6 @@ export const useAuth = () => {
   return context;
 };
 
-// Mock user data for UI testing (will be replaced with Firebase)
-const mockUsers: Record<string, User> = {
-  'teacher@micm.co.za': {
-    id: '1',
-    email: 'teacher@micm.co.za',
-    firstName: 'Sarah',
-    lastName: 'Mkhize',
-    role: 'teacher',
-    avatar: undefined,
-    createdAt: new Date(),
-  },
-  'student@micm.co.za': {
-    id: '2',
-    email: 'student@micm.co.za',
-    firstName: 'Thabo',
-    lastName: 'Ndlovu',
-    role: 'student',
-    avatar: undefined,
-    createdAt: new Date(),
-  },
-  'admin@micm.co.za': {
-    id: '3',
-    email: 'admin@micm.co.za',
-    firstName: 'Admin',
-    lastName: 'User',
-    role: 'admin',
-    avatar: undefined,
-    createdAt: new Date(),
-  },
-};
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -74,19 +43,44 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, password: string) => {
-    // Mock authentication - replace with Firebase later
+  const login = async (email: string, _password: string) => {
+    // Temporary: Accept any email/password combination for development
+    // Will be replaced with Firebase authentication later
+    // Password parameter kept for interface compatibility but not validated
     setIsLoading(true);
     await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
 
-    const foundUser = mockUsers[email];
-    if (foundUser && password === 'password') {
-      const userWithLogin = { ...foundUser, lastLogin: new Date() };
-      setUser(userWithLogin);
-      localStorage.setItem('micm_user', JSON.stringify(userWithLogin));
-    } else {
-      throw new Error('Invalid email or password');
+    // Determine role based on email pattern (for testing different dashboards)
+    let role: 'student' | 'teacher' | 'admin' = 'student';
+    const emailLower = email.toLowerCase();
+    
+    if (emailLower.includes('admin') || emailLower.includes('administrator')) {
+      role = 'admin';
+    } else if (emailLower.includes('teacher') || emailLower.includes('instructor') || emailLower.includes('staff')) {
+      role = 'teacher';
+    } else if (emailLower.includes('student') || emailLower.includes('learner')) {
+      role = 'student';
     }
+
+    // Extract name from email (for display)
+    const emailParts = email.split('@')[0].split(/[._-]/);
+    const firstName = emailParts[0] ? emailParts[0].charAt(0).toUpperCase() + emailParts[0].slice(1) : 'User';
+    const lastName = emailParts[1] ? emailParts[1].charAt(0).toUpperCase() + emailParts[1].slice(1) : '';
+
+    // Create user object
+    const newUser: User = {
+      id: Date.now().toString(),
+      email: email,
+      firstName: firstName,
+      lastName: lastName || 'User',
+      role: role,
+      avatar: undefined,
+      createdAt: new Date(),
+      lastLogin: new Date(),
+    };
+
+    setUser(newUser);
+    localStorage.setItem('micm_user', JSON.stringify(newUser));
     setIsLoading(false);
   };
 

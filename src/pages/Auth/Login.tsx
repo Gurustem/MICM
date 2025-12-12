@@ -87,11 +87,14 @@ const Login = () => {
           </form>
 
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <p className="text-xs text-blue-800 font-medium mb-2">Demo Accounts:</p>
+            <p className="text-xs text-blue-800 font-medium mb-2">Development Mode:</p>
             <div className="text-xs text-blue-700 space-y-1">
-              <p>Teacher: teacher@micm.co.za / password</p>
-              <p>Student: student@micm.co.za / password</p>
-              <p>Admin: admin@micm.co.za / password</p>
+              <p>✅ Any email and password will work!</p>
+              <p className="mt-2 font-medium">Role Detection:</p>
+              <p>• Email with "admin" → Admin Dashboard</p>
+              <p>• Email with "teacher" → Teacher Dashboard</p>
+              <p>• Any other email → Student Dashboard</p>
+              <p className="mt-2 text-blue-600">Examples: admin@test.com, teacher@test.com, student@test.com</p>
             </div>
           </div>
         </div>
