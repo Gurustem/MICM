@@ -58,9 +58,36 @@ Use clear, descriptive messages:
 - ❌ `"fix"` or `"update"` (too vague)
 
 ### Before Pushing
-1. ✅ Test your changes locally (`npm run dev`)
-2. ✅ Check for errors (`npm run build`)
-3. ✅ Review your changes in Cursor's Source Control
+
+**Always test before deploying!** Follow these steps:
+
+1. **✅ Test your changes locally**
+   ```bash
+   npm run dev
+   ```
+   - Opens at http://localhost:5173
+   - Test the features you changed
+   - Check for visual issues or broken functionality
+   - Press `Ctrl+C` to stop the server when done
+
+2. **✅ Check for build errors**
+   ```bash
+   npm run build
+   ```
+   - This simulates what Vercel will do
+   - Fix any TypeScript or build errors before pushing
+   - If build succeeds, you're good to go!
+
+3. **✅ Review your changes in Cursor's Source Control**
+   - Press `Ctrl+Shift+G` to open Source Control
+   - Review the files you've modified (highlighted in green)
+   - Make sure you're not committing:
+     - Debug code (`console.log`, commented code)
+     - Temporary files
+     - Sensitive information (passwords, API keys)
+   - Unstage files you don't want to commit (click the "-" icon)
+
+**Quick Check Script**: Run `check-before-push.bat` to automatically test steps 1 & 2!
 
 ### Frequency
 - Push frequently (after completing a feature or fix)
