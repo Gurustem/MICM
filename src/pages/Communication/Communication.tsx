@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageSquare, Search, Plus, Bell, Users, X, Send, AlertCircle } from 'lucide-react';
+import { FaSearch, FaPlus, FaBell, FaUsers, FaTimes, FaPaperPlane, FaExclamationTriangle, FaEnvelope } from 'react-icons/fa';
 import { format } from 'date-fns';
 import { useAuth } from '@/contexts/AuthContext';
 import { motion } from 'framer-motion';
@@ -141,7 +141,7 @@ const Communication = () => {
               onClick={() => setShowAnnouncementForm(true)}
               className="btn-primary flex items-center gap-2"
             >
-              <Plus className="w-5 h-5" />
+              <FaPlus className="w-5 h-5" />
               Post Announcement
             </motion.button>
           )}
@@ -151,7 +151,7 @@ const Communication = () => {
               whileTap={{ scale: 0.95 }}
               className="btn-primary flex items-center gap-2"
             >
-              <Plus className="w-5 h-5" />
+              <FaPlus className="w-5 h-5" />
               New Message
             </motion.button>
           )}
@@ -174,7 +174,7 @@ const Communication = () => {
             }`}
           >
             <div className="flex items-center gap-2">
-              <MessageSquare className="w-4 h-4" />
+              <FaEnvelope className="w-4 h-4" />
               Messages
               {messages.filter(m => !m.read).length > 0 && (
                 <span className="badge bg-red-100 text-red-700">
@@ -192,7 +192,7 @@ const Communication = () => {
             }`}
           >
             <div className="flex items-center gap-2">
-              <Bell className="w-4 h-4" />
+              <FaBell className="w-4 h-4" />
               Announcements
               <span className="badge bg-primary-100 text-primary-700">
                 {announcements.length}
@@ -208,25 +208,25 @@ const Communication = () => {
             }`}
           >
             <div className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
+              <FaUsers className="w-4 h-4" />
               Forums
             </div>
           </button>
         </div>
 
         {/* Search */}
-        <div className="mt-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder={`Search ${activeTab}...`}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="input-field pl-10"
-            />
-          </div>
-        </div>
+            <div className="mt-4">
+              <div className="relative group">
+                <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  type="text"
+                  placeholder={`Search ${activeTab}...`}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="input-field pl-12"
+                />
+              </div>
+            </div>
       </motion.div>
 
       {/* Announcement Form */}
@@ -242,7 +242,7 @@ const Communication = () => {
               onClick={() => setShowAnnouncementForm(false)}
               className="text-gray-400 hover:text-gray-600"
             >
-              <X className="w-5 h-5" />
+              <FaTimes className="w-5 h-5" />
             </button>
           </div>
           <form onSubmit={handlePostAnnouncement} className="space-y-4">
@@ -296,7 +296,7 @@ const Communication = () => {
                 whileTap={{ scale: 0.95 }}
                 className="btn-primary flex items-center gap-2 flex-1"
               >
-                <Send className="w-5 h-5" />
+                <FaPaperPlane className="w-5 h-5" />
                 Post Announcement
               </motion.button>
               <button
@@ -363,7 +363,7 @@ const Communication = () => {
                     <div className="flex items-center gap-2">
                       {announcement.priority === 'high' && (
                         <span className="badge bg-red-100 text-red-700 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" />
+                          <FaExclamationTriangle className="w-3 h-3" />
                           High Priority
                         </span>
                       )}
@@ -381,7 +381,7 @@ const Communication = () => {
               ))
             ) : (
               <div className="text-center py-12">
-                <Bell className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <FaBell className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-600">No announcements found</p>
               </div>
             )}

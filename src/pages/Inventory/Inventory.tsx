@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Music, Search, Filter, Plus, AlertCircle, Clock, Calendar, RefreshCw } from 'lucide-react';
+import { FaMusic, FaSearch, FaFilter, FaPlus, FaExclamationTriangle, FaClock, FaCalendarAlt, FaSync, FaUser, FaCheckCircle } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
 import { format, addDays, addYears, differenceInDays, isAfter } from 'date-fns';
 import { motion } from 'framer-motion';
@@ -104,14 +104,20 @@ const Inventory = () => {
 
   const getStatusBadge = (status: string, loanType?: LoanType, renewalDate?: Date) => {
     if (status === 'available') {
-      return <span className="badge bg-green-100 text-green-700">Available</span>;
+      return <span className="badge bg-green-100 text-green-700 flex items-center gap-1">
+        <FaCheckCircle className="w-3 h-3" />
+        Available
+      </span>;
     }
     if (status === 'maintenance') {
-      return <span className="badge bg-yellow-100 text-yellow-700">Maintenance</span>;
+      return <span className="badge bg-yellow-100 text-yellow-700 flex items-center gap-1">
+        <FaExclamationTriangle className="w-3 h-3" />
+        Maintenance
+      </span>;
     }
     if (loanType === 'borrowed') {
       return <span className="badge bg-blue-100 text-blue-700 flex items-center gap-1">
-        <Clock className="w-3 h-3" />
+        <FaClock className="w-3 h-3" />
         Borrowed (Same Day)
       </span>;
     }
@@ -119,12 +125,12 @@ const Inventory = () => {
       const needsRenewal = renewalDate && (isAfter(new Date(), renewalDate) || differenceInDays(renewalDate, new Date()) <= 30);
       if (needsRenewal) {
         return <span className="badge bg-red-100 text-red-700 flex items-center gap-1">
-          <AlertCircle className="w-3 h-3" />
+          <FaExclamationTriangle className="w-3 h-3" />
           Needs Renewal
         </span>;
       }
       return <span className="badge bg-purple-100 text-purple-700 flex items-center gap-1">
-        <Calendar className="w-3 h-3" />
+        <FaCalendarAlt className="w-3 h-3" />
         Loaned
       </span>;
     }
@@ -263,11 +269,11 @@ const Inventory = () => {
         <BackButton to="/inventory" />
         <div className="card max-w-2xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-              <Plus className="w-6 h-6 text-primary-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <FaPlus className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-display font-bold text-gray-900">Add New Instrument</h1>
+              <h1 className="text-2xl font-display font-bold gradient-text">Add New Instrument</h1>
               <p className="text-gray-600">Register a new instrument to the inventory</p>
             </div>
           </div>
@@ -357,18 +363,18 @@ const Inventory = () => {
           className="card max-w-2xl mx-auto"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Clock className="w-6 h-6 text-blue-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <FaClock className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-display font-bold text-gray-900">Borrow Instrument</h1>
+              <h1 className="text-2xl font-display font-bold gradient-text">Borrow Instrument</h1>
               <p className="text-gray-600">{instrument?.name} - Same day use only (cannot leave premises)</p>
             </div>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-            <div className="flex items-start gap-2">
-              <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <FaExclamationTriangle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
               <div className="text-sm text-blue-800">
                 <p className="font-medium mb-1">Borrowing Rules:</p>
                 <ul className="list-disc list-inside space-y-1">
@@ -430,18 +436,18 @@ const Inventory = () => {
           className="card max-w-2xl mx-auto"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-purple-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <FaCalendarAlt className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-display font-bold text-gray-900">Loan Instrument</h1>
+              <h1 className="text-2xl font-display font-bold gradient-text">Loan Instrument</h1>
               <p className="text-gray-600">{instrument?.name} - Long-term loan (up to 1 year, renewable)</p>
             </div>
           </div>
 
-          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
-            <div className="flex items-start gap-2">
-              <AlertCircle className="w-5 h-5 text-purple-600 mt-0.5" />
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <FaExclamationTriangle className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
               <div className="text-sm text-purple-800">
                 <p className="font-medium mb-1">Loan Agreement Terms:</p>
                 <ul className="list-disc list-inside space-y-1">
@@ -539,17 +545,26 @@ const Inventory = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <BackButton to="/dashboard" />
-          <h1 className="text-3xl font-display font-bold text-gray-900 mt-2 mb-2">Instrument Inventory</h1>
-          <p className="text-gray-600">Manage, borrow, and loan musical instruments</p>
+          <div className="flex items-center gap-4 mt-2 mb-2">
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 via-blue-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <FaMusic className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-display font-bold gradient-text">Instrument Inventory</h1>
+              <p className="text-gray-600">Manage, borrow, and loan musical instruments</p>
+            </div>
+          </div>
         </div>
         {canManage && (
-          <button 
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setSearchParams({ action: 'add' })}
             className="btn-primary flex items-center gap-2"
           >
-            <Plus className="w-5 h-5" />
+            <FaPlus className="w-5 h-5" />
             Add Instrument
-          </button>
+          </motion.button>
         )}
       </div>
 
@@ -557,21 +572,21 @@ const Inventory = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="card"
+        className="card border-0"
       >
         <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <div className="flex-1 relative group">
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
             <input
               type="text"
               placeholder="Search instruments..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="input-field pl-10"
+              className="input-field pl-12"
             />
           </div>
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-gray-400" />
+            <FaFilter className="w-5 h-5 text-gray-400" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as typeof statusFilter)}
@@ -616,8 +631,8 @@ const Inventory = () => {
                 }`}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <Music className="w-6 h-6 text-primary-600" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                    <FaMusic className="w-7 h-7 text-white" />
                   </div>
                   {getStatusBadge(instrument.status, instrument.loanType, instrument.renewalDate)}
                 </div>
@@ -634,32 +649,36 @@ const Inventory = () => {
                   
                   {instrument.borrowedBy && (
                     <>
-                      <p><span className="font-medium">Borrowed/Loaned by:</span> {instrument.borrowedBy}</p>
+                      <p className="flex items-center gap-2">
+                        <FaUser className="w-4 h-4 text-gray-400" />
+                        <span><span className="font-medium">Borrowed/Loaned by:</span> {instrument.borrowedBy}</span>
+                      </p>
                       {instrument.loanType === 'borrowed' && instrument.dueDate && (
-                        <p className={isOverdue ? 'text-red-600 font-medium' : 'text-blue-600'}>
-                          <span className="font-medium">Return by:</span>{' '}
-                          {format(instrument.dueDate, 'MMM d, yyyy • h:mm a')} (End of day)
+                        <p className={`flex items-center gap-2 ${isOverdue ? 'text-red-600 font-medium' : 'text-blue-600'}`}>
+                          <FaClock className="w-4 h-4" />
+                          <span><span className="font-medium">Return by:</span> {format(instrument.dueDate, 'MMM d, yyyy • h:mm a')} (End of day)</span>
                         </p>
                       )}
                       {instrument.loanType === 'loaned' && (
                         <>
                           {instrument.loanEndDate && (
-                            <p>
-                              <span className="font-medium">Loan ends:</span>{' '}
-                              {format(instrument.loanEndDate, 'MMM d, yyyy')}
+                            <p className="flex items-center gap-2">
+                              <FaCalendarAlt className="w-4 h-4 text-gray-400" />
+                              <span><span className="font-medium">Loan ends:</span> {format(instrument.loanEndDate, 'MMM d, yyyy')}</span>
                             </p>
                           )}
                           {instrument.parentGuardianName && (
-                            <p>
-                              <span className="font-medium">Parent/Guardian:</span> {instrument.parentGuardianName}
+                            <p className="flex items-center gap-2">
+                              <FaUser className="w-4 h-4 text-gray-400" />
+                              <span><span className="font-medium">Parent/Guardian:</span> {instrument.parentGuardianName}</span>
                             </p>
                           )}
                           {needsRenewal && (
-                            <p className="text-red-600 font-medium flex items-center gap-1">
-                              <AlertCircle className="w-4 h-4" />
-                              {daysUntilRenewal !== null && daysUntilRenewal > 0
+                            <p className="text-red-600 font-medium flex items-center gap-2">
+                              <FaExclamationTriangle className="w-4 h-4" />
+                              <span>{daysUntilRenewal !== null && daysUntilRenewal > 0
                                 ? `Renewal due in ${daysUntilRenewal} days`
-                                : 'Renewal overdue'}
+                                : 'Renewal overdue'}</span>
                             </p>
                           )}
                         </>
@@ -668,50 +687,63 @@ const Inventory = () => {
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
-                  {isStudent && instrument.status === 'available' && (
+                      {isStudent && instrument.status === 'available' && (
                     <div className="flex gap-2">
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setSearchParams({ borrow: 'true', id: instrument.id })}
                         className="btn-primary flex-1 text-sm flex items-center justify-center gap-2"
                       >
-                        <Clock className="w-4 h-4" />
+                        <FaClock className="w-4 h-4" />
                         Borrow (Same Day)
-                      </button>
-                      <button
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setSearchParams({ loan: 'true', id: instrument.id })}
                         className="btn-secondary flex-1 text-sm flex items-center justify-center gap-2"
                       >
-                        <Calendar className="w-4 h-4" />
+                        <FaCalendarAlt className="w-4 h-4" />
                         Loan (Long-term)
-                      </button>
+                      </motion.button>
                     </div>
                   )}
                   {canManage && (
                     <>
                       {instrument.status === 'available' && (
                         <div className="flex gap-2">
-                          <button
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => setSearchParams({ borrow: 'true', id: instrument.id })}
-                            className="btn-primary flex-1 text-sm"
+                            className="btn-primary flex-1 text-sm flex items-center justify-center gap-2"
                           >
+                            <FaClock className="w-4 h-4" />
                             Record Borrow
-                          </button>
-                          <button
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => setSearchParams({ loan: 'true', id: instrument.id })}
-                            className="btn-secondary flex-1 text-sm"
+                            className="btn-secondary flex-1 text-sm flex items-center justify-center gap-2"
                           >
+                            <FaCalendarAlt className="w-4 h-4" />
                             Record Loan
-                          </button>
+                          </motion.button>
                         </div>
                       )}
                       {(instrument.status === 'borrowed' || instrument.status === 'loaned') && (
                         <div className="flex gap-2">
-                          <button
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => handleReturn(instrument.id)}
-                            className="btn-secondary flex-1 text-sm"
+                            className="btn-secondary flex-1 text-sm flex items-center justify-center gap-2"
                           >
+                            <FaCheckCircle className="w-4 h-4" />
                             Return
-                          </button>
+                          </motion.button>
                           {instrument.loanType === 'loaned' && needsRenewal && (
                             <motion.button
                               whileHover={{ scale: 1.05 }}
@@ -719,13 +751,19 @@ const Inventory = () => {
                               onClick={() => handleRenewal(instrument.id)}
                               className="btn-primary text-sm flex items-center justify-center gap-2"
                             >
-                              <RefreshCw className="w-4 h-4" />
+                              <FaSync className="w-4 h-4" />
                               Renew Loan
                             </motion.button>
                           )}
                         </div>
                       )}
-                      <button className="btn-secondary text-sm">View Details</button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="btn-secondary text-sm w-full"
+                      >
+                        View Details
+                      </motion.button>
                     </>
                   )}
                 </div>
@@ -734,10 +772,14 @@ const Inventory = () => {
           })}
         </div>
       ) : (
-        <div className="card text-center py-12">
-          <Music className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="card text-center py-12 border-0"
+        >
+          <FaMusic className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <p className="text-gray-600">No instruments found</p>
-        </div>
+        </motion.div>
       )}
 
       {/* Summary Stats */}
