@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TrendingUp, Users, BookOpen, Music, Download, Calendar, Award, Clock, Target, ArrowUp, ArrowDown, Activity, Zap } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Line, AreaChart, Area, Legend } from 'recharts';
 import { motion } from 'framer-motion';
+import BackButton from '@/components/BackButton';
 
 const Analytics = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'year'>('month');
@@ -140,7 +141,8 @@ const Analytics = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900 mb-2">Analytics & Reports</h1>
+          <BackButton to="/dashboard" />
+          <h1 className="text-3xl font-display font-bold text-gray-900 mt-2 mb-2">Analytics & Reports</h1>
           <p className="text-gray-600">Comprehensive insights into student progress and engagement</p>
         </div>
         <div className="flex items-center gap-3">

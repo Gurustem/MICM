@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Search, Filter, BookOpen, Users } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import BackButton from '@/components/BackButton';
 
 const Courses = () => {
   const { user } = useAuth();
@@ -60,7 +61,8 @@ const Courses = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900 mb-2">Courses</h1>
+          <BackButton to="/dashboard" />
+          <h1 className="text-3xl font-display font-bold text-gray-900 mt-2 mb-2">Courses</h1>
           <p className="text-gray-600">Browse and manage your courses</p>
         </div>
         {canCreateCourse && (

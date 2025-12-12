@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Music, Search, Filter, Plus, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { format } from 'date-fns';
+import BackButton from '@/components/BackButton';
 
 const Inventory = () => {
   const { user } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'borrowed' | 'maintenance'>('all');
+  const action = searchParams.get('action');
 
   // Mock data
   const instruments = [
@@ -86,15 +90,108 @@ const Inventory = () => {
     }
   };
 
+  if (action === 'add') {
+    return (
+      <div className="space-y-6">
+        <BackButton to="/inventory" />
+        <div className="card max-w-2xl mx-auto">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+              <Plus className="w-6 h-6 text-primary-600" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-display font-bold text-gray-900">Add New Instrument</h1>
+              <p className="text-gray-600">Register a new instrument to the inventory</p>
+            </div>
+          </div>
+
+          <form className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Instrument Name</label>
+              <input type="text" className="input-field" placeholder="e.g., Yamaha Piano Keyboard" required />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                <select className="input-field" required>
+                  <option value="">Select type</option>
+                  <option value="Keyboard">Keyboard</option>
+                  <option value="String">String</option>
+                  <option value="Guitar">Guitar</option>
+                  <option value="Woodwind">Woodwind</option>
+                  <option value="Brass">Brass</option>
+                  <option value="Percussion">Percussion</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Brand</label>
+                <input type="text" className="input-field" placeholder="e.g., Yamaha" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Model</label>
+                <input type="text" className="input-field" placeholder="Model number" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Serial Number</label>
+                <input type="text" className="input-field" placeholder="Serial number" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Condition</label>
+                <select className="input-field" required>
+                  <option value="">Select condition</option>
+                  <option value="excellent">Excellent</option>
+                  <option value="good">Good</option>
+                  <option value="fair">Fair</option>
+                  <option value="needs-repair">Needs Repair</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                <input type="text" className="input-field" placeholder="e.g., Storage Room, Room A" required />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+              <textarea
+                className="input-field"
+                rows={3}
+                placeholder="Additional notes about the instrument..."
+              />
+            </div>
+
+            <div className="flex items-center gap-4 pt-4">
+              <button type="submit" className="btn-primary">Add Instrument</button>
+              <button type="button" onClick={() => setSearchParams({})} className="btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900 mb-2">Instrument Inventory</h1>
+          <BackButton to="/dashboard" />
+          <h1 className="text-3xl font-display font-bold text-gray-900 mt-2 mb-2">Instrument Inventory</h1>
           <p className="text-gray-600">Manage and borrow musical instruments</p>
         </div>
         {canManage && (
-          <button className="btn-primary flex items-center gap-2">
+          <button 
+            onClick={() => setSearchParams({ action: 'add' })}
+            className="btn-primary flex items-center gap-2"
+          >
             <Plus className="w-5 h-5" />
             Add Instrument
           </button>

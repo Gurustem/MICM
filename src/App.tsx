@@ -13,6 +13,8 @@ import Analytics from './pages/Analytics/Analytics';
 import Profile from './pages/Profile/Profile';
 import PracticeTracker from './pages/PracticeTracker/PracticeTracker';
 import SheetMusic from './pages/SheetMusic/SheetMusic';
+import Users from './pages/Users/Users';
+import Settings from './pages/Settings/Settings';
 
 // Protected Layout Component
 const ProtectedLayout = () => {
@@ -68,6 +70,24 @@ function AppRoutes() {
             <RoleProtectedRoute 
               element={<Analytics />} 
               allowedRoles={['teacher', 'admin']} 
+            />
+          }
+        />
+        <Route
+          path="users"
+          element={
+            <RoleProtectedRoute 
+              element={<Users />} 
+              allowedRoles={['admin']} 
+            />
+          }
+        />
+        <Route
+          path="settings"
+          element={
+            <RoleProtectedRoute 
+              element={<Settings />} 
+              allowedRoles={['admin']} 
             />
           }
         />
