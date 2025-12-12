@@ -181,6 +181,8 @@ export interface Question {
 }
 
 // Inventory Types
+export type LoanType = 'borrowed' | 'loaned';
+
 export interface Instrument {
   id: string;
   name: string;
@@ -189,10 +191,17 @@ export interface Instrument {
   model?: string;
   serialNumber?: string;
   condition: 'excellent' | 'good' | 'fair' | 'needs-repair';
-  status: 'available' | 'borrowed' | 'maintenance';
+  status: 'available' | 'borrowed' | 'loaned' | 'maintenance';
+  loanType?: LoanType; // 'borrowed' for same-day, 'loaned' for long-term
   borrowedBy?: string;
+  borrowedByStudentId?: string;
   borrowedAt?: Date;
-  dueDate?: Date;
+  dueDate?: Date; // For borrowed: end of same day, for loaned: up to 1 year
+  loanStartDate?: Date; // For loaned instruments
+  loanEndDate?: Date; // For loaned instruments (1 year max)
+  renewalDate?: Date; // When loan needs to be renewed
+  parentGuardianName?: string; // Required for loans
+  parentGuardianContact?: string; // Required for loans
   location: string;
   notes?: string;
 }
