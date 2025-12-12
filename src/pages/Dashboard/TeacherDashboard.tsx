@@ -1,4 +1,4 @@
-import { BookOpen, ClipboardCheck, Music, TrendingUp, AlertCircle, GraduationCap, Clock, Target, ArrowUpRight, Sparkles } from 'lucide-react';
+import { BookOpen, ClipboardCheck, Music, TrendingUp, AlertCircle, GraduationCap, Clock, Target, ArrowUpRight, Sparkles, Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { motion } from 'framer-motion';
@@ -13,6 +13,12 @@ const TeacherDashboard = () => {
     activeCourses: 8,
     pendingAssessments: 12,
     borrowedInstruments: 23,
+    leaveDays: {
+      annual: 11,
+      sick: 10,
+      familyResponsibility: 5,
+      other: 3,
+    },
   };
 
   const recentStudents = [
@@ -266,6 +272,48 @@ const TeacherDashboard = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Leave Days Summary */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="card bg-gradient-to-r from-primary-50 to-secondary-50 border-2 border-primary-200"
+      >
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+            <Calendar className="w-5 h-5 text-primary-600" />
+            Leave Balance
+          </h2>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/leave')}
+            className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1"
+          >
+            Manage Leave
+            <ArrowUpRight className="w-4 h-4" />
+          </motion.button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <p className="text-sm text-gray-600 mb-1">Annual Leave</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.leaveDays.annual} / 14</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-600 mb-1">Sick Leave</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.leaveDays.sick} / 10</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-600 mb-1">Family Responsibility</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.leaveDays.familyResponsibility} / 5</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-600 mb-1">Other</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.leaveDays.other} / 3</p>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Quick Actions */}
       <motion.div

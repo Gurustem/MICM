@@ -13,6 +13,8 @@ export interface User {
   lastLogin?: Date;
 }
 
+export type StudentType = 'internal' | 'external';
+
 export interface Student extends User {
   role: 'student';
   age: number;
@@ -20,6 +22,7 @@ export interface Student extends User {
   grade: string;
   parentId?: string;
   progress: StudentProgress;
+  studentType: StudentType; // internal or external
 }
 
 export interface Teacher extends User {
@@ -27,6 +30,34 @@ export interface Teacher extends User {
   instruments: string[];
   bio?: string;
   qualifications?: string[];
+  leaveDays: LeaveBalance;
+}
+
+export interface LeaveBalance {
+  annual: number; // 14 days
+  sick: number;
+  familyResponsibility: number;
+  other: number;
+}
+
+export type LeaveType = 'annual' | 'sick' | 'familyResponsibility' | 'other';
+
+export interface LeaveApplication {
+  id: string;
+  teacherId: string;
+  teacherName: string;
+  leaveType: LeaveType;
+  startDate: Date;
+  endDate: Date;
+  totalDays: number;
+  reason: string;
+  replacementTeacher?: string;
+  studentActivities?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  submittedAt: Date;
+  reviewedBy?: string;
+  reviewedAt?: Date;
+  comments?: string;
 }
 
 export interface StudentProgress {
@@ -58,6 +89,10 @@ export interface Course {
   thumbnail?: string;
   enrolledStudents: string[];
   lessons: Lesson[];
+  studentType?: StudentType; // internal or external
+  lessonType?: 'one-on-one' | 'group'; // for internal: one-on-one practical, group theory
+  groupSize?: number; // for external: ~40, for internal theory: 20-30
+  frequency?: string; // for external: once a week, for internal: during week (practical) / Saturdays (theory)
   createdAt: Date;
   updatedAt: Date;
 }

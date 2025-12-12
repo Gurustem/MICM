@@ -10,6 +10,7 @@ import {
   X,
   Users,
   Settings,
+  Calendar,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -40,6 +41,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     { path: '/analytics', icon: BarChart3, label: 'Analytics' },
     { path: '/communication', icon: MessageSquare, label: 'Messages' },
     { path: '/users', icon: Users, label: 'Students' },
+    { path: '/leave', icon: Calendar, label: 'Leave Management' },
   ];
 
   const adminNavItems = [

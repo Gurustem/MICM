@@ -8,6 +8,8 @@ const AdminDashboard = () => {
   // Mock data
   const stats = {
     totalStudents: 155,
+    internalStudents: 155,
+    externalStudents: 300,
     totalTeachers: 16,
     activeCourses: 48,
     totalInstruments: 120,
@@ -21,23 +23,33 @@ const AdminDashboard = () => {
 
   const statCards = [
     {
-      label: 'Total Students',
-      value: stats.totalStudents,
+      label: 'Internal Students',
+      value: stats.internalStudents,
       icon: GraduationCap,
       bgColor: 'bg-primary-100',
       textColor: 'text-primary-600',
       borderColor: 'border-primary-200',
-      path: '/users',
+      path: '/users?type=internal',
       trend: '+12%',
+    },
+    {
+      label: 'External Students',
+      value: stats.externalStudents,
+      icon: GraduationCap,
+      bgColor: 'bg-secondary-100',
+      textColor: 'text-secondary-600',
+      borderColor: 'border-secondary-200',
+      path: '/users?type=external',
+      trend: '+25',
     },
     {
       label: 'Teachers',
       value: stats.totalTeachers,
       icon: UserCheck,
-      bgColor: 'bg-secondary-100',
-      textColor: 'text-secondary-600',
-      borderColor: 'border-secondary-200',
-      path: '/users',
+      bgColor: 'bg-green-100',
+      textColor: 'text-green-600',
+      borderColor: 'border-green-200',
+      path: '/users?role=teacher',
       trend: '+2',
     },
     {
@@ -131,7 +143,7 @@ const AdminDashboard = () => {
 
       {/* Stats Grid */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

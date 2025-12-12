@@ -15,6 +15,7 @@ import PracticeTracker from './pages/PracticeTracker/PracticeTracker';
 import SheetMusic from './pages/SheetMusic/SheetMusic';
 import Users from './pages/Users/Users';
 import Settings from './pages/Settings/Settings';
+import LeaveManagement from './pages/LeaveManagement/LeaveManagement';
 
 // Protected Layout Component
 const ProtectedLayout = () => {
@@ -88,6 +89,15 @@ function AppRoutes() {
             <RoleProtectedRoute 
               element={<Settings />} 
               allowedRoles={['admin']} 
+            />
+          }
+        />
+        <Route
+          path="leave"
+          element={
+            <RoleProtectedRoute 
+              element={<LeaveManagement />} 
+              allowedRoles={['teacher']} 
             />
           }
         />
