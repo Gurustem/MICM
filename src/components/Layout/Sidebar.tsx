@@ -46,6 +46,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     { path: '/assessments', icon: FaClipboardList, label: 'Assessments', color: 'from-orange-500 to-orange-600' },
     { path: '/inventory', icon: FaMusic, label: 'Inventory', color: 'from-indigo-500 to-indigo-600' },
     { path: '/analytics', icon: FaChartBar, label: 'Analytics', color: 'from-green-500 to-green-600' },
+    { path: '/reports', icon: FaFileAlt, label: 'Reports', color: 'from-amber-500 to-amber-600' },
     { path: '/communication', icon: FaComments, label: 'Messages', color: 'from-cyan-500 to-cyan-600' },
     { path: '/users', icon: FaUsers, label: 'Students', color: 'from-violet-500 to-violet-600' },
     { path: '/leave', icon: FaCalendarAlt, label: 'Leave Management', color: 'from-rose-500 to-rose-600' },

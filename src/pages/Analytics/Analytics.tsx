@@ -161,10 +161,17 @@ const Analytics = () => {
               </button>
             ))}
           </div>
-          <button className="btn-primary flex items-center gap-2">
-            <Download className="w-5 h-5" />
-            Export Report
-          </button>
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = '/reports'}
+              className="btn-primary flex items-center gap-2"
+            >
+              <Download className="w-5 h-5" />
+              Generate Reports
+            </motion.button>
+          </div>
         </div>
       </div>
 
